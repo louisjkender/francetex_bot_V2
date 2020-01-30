@@ -1,0 +1,41 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Flasky{% endblock %}
+
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img alt="Qries" src="https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_1000/https://francetex.fr/wp-content/uploads/2019/05/logopetit.png" width=150 height=45 style=' -webkit-filter: brightness(0.98);
+  filter: brightness(0.98);margin-top:2px;'>
+
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Acceuil</a></li>
+      <li><a href="#">infos</a></li>
+      <li><a href="#">Nos engagements</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+     <button href="https://www.francetex.fr" class="btn btn-primary navbar-btn">Retourner sur notre site</button>
+  </div>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="container">
+{% for message in get_flashed_messages() %} <div class="alert alert-warning">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+{{ message }}
+</div>
+{% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
+
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="page-header" style="margin:60px 200px 0px 200px;">
+<h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+</div>
+<div style="margin:60px 200px 0px 200px;">
+{{ wtf.quick_form(form) }}
+</div>
+{% endblock %}
