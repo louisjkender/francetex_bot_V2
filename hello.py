@@ -78,6 +78,7 @@ def bot(name):
             big=form.big.data
             title=form.title.data
             priceprint=0
+            tot=0
 
             marge=form.marge.data
             if marge is None:
