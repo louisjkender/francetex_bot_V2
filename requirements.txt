@@ -1,4 +1,3 @@
--r requirements/heroku.txt
 
 Flask-SSLify==0.1.5
 gunicorn==19.7.1
