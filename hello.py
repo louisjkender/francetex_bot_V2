@@ -72,6 +72,7 @@ def bot(name):
     carre=form.carre.data
     big=form.big.data
     title=form.title.data
+    priceprint=0
     
     marge=form.marge.data
     if title=="hoodie":
