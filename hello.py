@@ -65,6 +65,7 @@ def bot(name):
     quantity=1
     produitparfeuille=1
     size=3
+    productprice=0
     color=form.color.data
     quantity=form.quantity.data
     lettragecoeur=form.lettragecoeur.data
