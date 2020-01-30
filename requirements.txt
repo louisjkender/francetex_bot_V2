@@ -1,5 +1,8 @@
 -r requirements/heroku.txt
 
+Flask-SSLify==0.1.5
+gunicorn==19.7.1
+psycopg2==2.7.3
 Click==7.0    
 dnspython==1.16.0 
 dominate==2.4.0  
