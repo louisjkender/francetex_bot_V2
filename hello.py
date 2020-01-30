@@ -30,6 +30,8 @@ coeur=0
 carre=0
 big=0
 marge=0
+tot=0
+totTVA=0
 lock=True
 class NameForm(FlaskForm):
         name = StringField('Quel est votre nom?', validators=[DataRequired()])
