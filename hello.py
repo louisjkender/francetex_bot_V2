@@ -62,14 +62,17 @@ def bot(name):
     marge=0
     lettragecoeur=0
     form = FormDevis()
+    quantity=1
+    produitparfeuille=1
 
+    color=form.color.data
     quantity=form.quantity.data
     lettragecoeur=form.lettragecoeur.data
     coeur=form.coeur.data
     carre=form.carre.data
     big=form.big.data
     title=form.title.data
-    color=form.color.data
+
     marge=form.marge.data
     if title=="hoodie":
          productprice=8
@@ -161,6 +164,9 @@ def bot(name):
             elif coeur==3 and carre==0 and  big==0:
                  size=4
                  produitparfeuille=int(2)
+            else:
+                produitparfeuille=10
+                quantity=10
     quantityfeuille=float(quantity)/float(produitparfeuille)
     if lock==True:
                            if color==1:
@@ -279,6 +285,8 @@ def bot(name):
                                  feuilleprice=139
                            if quantityfeuille>45 and quantityfeuille<=61:
                                feuilleprice=150
+                           else:
+                               feuilleprice=1
     feuilleprice=feuilleprice+9+0.80*quantity
     priceprint=feuilleprice
     tot=quantity*productprice+priceprint
