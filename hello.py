@@ -87,6 +87,10 @@ def bot(name):
     productvariable=0
     if color is None:
                 color=0
+  
+
+    if size is None:
+                size=4
 
     if lock==True:
             if coeur==0 and carre==0 and big==1:
