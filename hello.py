@@ -85,6 +85,9 @@ def bot(name):
     tax=2
     priceprint=0
     productvariable=0
+    if color is None:
+                color=0
+
     if lock==True:
             if coeur==0 and carre==0 and big==1:
                 size=4
