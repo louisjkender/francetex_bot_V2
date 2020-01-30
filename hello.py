@@ -313,5 +313,6 @@ def bot(name):
             tot=tot*(float(marge)+100)/100
             tot=round(tot,2)
             PU=tot/quantity
-            PU=round(PU,2)
-    return render_template('bot.html', name=name, form=form, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
+            PU=round(PU,2)             
+            return render_template('bot.html', name=name, form=form, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
+    return render_template('bot.html', name=name, form=form)
