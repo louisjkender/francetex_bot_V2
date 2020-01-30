@@ -169,6 +169,7 @@ def bot(name):
                 quantity=10
     quantityfeuille=float(quantity)/float(produitparfeuille)
     if lock==True:
+             
                            if color==1:
                               if quantityfeuille<=15:
                                        quantityfeuille=15
@@ -180,7 +181,7 @@ def bot(name):
                                        quantityfeuille=30
                               elif quantityfeuille>30:
                                  size=3
-                           elif color>=2:
+                           elif color>=int(2):
                               if quantityfeuille<=6:
                                   quantityfeuille=10
                               if quantityfeuille>6 and quantityfeuille<=10 :
