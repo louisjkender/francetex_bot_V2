@@ -64,7 +64,7 @@ def bot(name):
     form = FormDevis()
     quantity=1
     produitparfeuille=1
-
+    size=3
     color=form.color.data
     quantity=form.quantity.data
     lettragecoeur=form.lettragecoeur.data
@@ -72,7 +72,7 @@ def bot(name):
     carre=form.carre.data
     big=form.big.data
     title=form.title.data
-
+    
     marge=form.marge.data
     if title=="hoodie":
          productprice=8
@@ -89,8 +89,6 @@ def bot(name):
                 color=0
   
 
-    if size is None:
-                size=4
 
     if lock==True:
             if coeur==0 and carre==0 and big==1:
