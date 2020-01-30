@@ -77,6 +77,8 @@ def bot(name):
     priceprint=0
     
     marge=form.marge.data
+    if marge is None:
+        marge=0
     if title=="hoodie":
          productprice=8
     if title=="casquette":
