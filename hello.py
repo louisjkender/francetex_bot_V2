@@ -47,7 +47,7 @@ class FormDevis(FlaskForm):
         carre = IntegerField('logo carre?', validators=[NumberRange(min=0, max=10)])
         big = IntegerField('logo A4?', validators=[NumberRange(min=0, max=10)])
         color=IntegerField('Combien de couleur', validators=[NumberRange(min=0, max=10)])
-        marge=IntegerField('Marge bénéficiaire (%+)', validators=[NumberRange(min=0, max=10)])
+        marge=IntegerField('Marge bénéficiaire (%+)', validators=[NumberRange(min=0, max=100)])
         submit = SubmitField('Calculer le prix des tshirts')
 
 
