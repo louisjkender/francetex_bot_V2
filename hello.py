@@ -315,4 +315,4 @@ def bot(name):
             PU=tot/quantity
             PU=round(PU,2)             
             return render_template('bot.html', name=name, form=form, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
-    return render_template('bot.html', name=name, form=form)
+    return render_template('bot.html', name=name, form=form,, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
