@@ -30,9 +30,8 @@ coeur=0
 carre=0
 big=0
 marge=0
-tot=0
-totTVA=0
 lock=True
+tot=0
 class NameForm(FlaskForm):
         name = StringField('Quel est votre nom?', validators=[DataRequired()])
         submit = SubmitField('Faire le devis')
@@ -43,12 +42,13 @@ class FormDevis(FlaskForm):
         quantity = IntegerField('Quantité?', validators=[NumberRange(min=0, max=1000)])
         printype=SelectField('Quelle impression souhaitez-vous', [DataRequired()], choices=[('impression', 'impression'),('broderie', 'broderie')])
         lettragecoeur = IntegerField('lettrage coeur?', validators=[NumberRange(min=0, max=10)])
+        lettragedos=IntegerField('lettrage dos?', validators=[NumberRange(min=0, max=10)])
         coeur = IntegerField('logo coeur?', validators=[NumberRange(min=0, max=10)])
         carre = IntegerField('logo carre?', validators=[NumberRange(min=0, max=10)])
         big = IntegerField('logo A4?', validators=[NumberRange(min=0, max=10)])
         color=IntegerField('Combien de couleur', validators=[NumberRange(min=0, max=10)])
         marge=IntegerField('Marge bénéficiaire (%+)', validators=[NumberRange(min=0, max=100)])
-        submit = SubmitField('Calculer le prix des tshirts')
+        submit = SubmitField('Calculer')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -60,135 +60,170 @@ def index():
 
 @app.route('/bot/<name>', methods=['GET', 'POST'])
 def bot(name):
-
+    tot=0
+    totTVA=0
+    coeur=0
+    carre=0
+    big=0
+    produitparfeuille=0
+    feuilleprice=0
+    color=0
+    PU=0
     marge=0
     lettragecoeur=0
     form = FormDevis()
-    if form.validate_on_submit():
-            quantity=1
-            produitparfeuille=1
-            size=3
-            productprice=0
-            marge=0
-            color=form.color.data
-            quantity=form.quantity.data
-            lettragecoeur=form.lettragecoeur.data
-            coeur=form.coeur.data
-            carre=form.carre.data
-            big=form.big.data
-            title=form.title.data
-            priceprint=0
-            tot=0
+    frais=0
+    quantity=1
+    produitparfeuille=1
+    size=3
+    productprice=0
+    marge=0
+    lettragedos=0
+    color=form.color.data
+    quantity=form.quantity.data
+    lettragecoeur=form.lettragecoeur.data
+    coeur=form.coeur.data
+    carre=form.carre.data
+    big=form.big.data
+    title=form.title.data
+    priceprint=0
+    printype=form.printype.data
+    marge=form.marge.data
+    lettragedos=form.marge.data
+    if lettragecoeur is None:
+        lettragecoeur=0
+    if marge is None:
+        marge=0
+    if quantity is None:
+        quantity=1
+    if productprice is None:
+        productprice=0
+    if priceprint is None:
+        priceprint=0
+    if title=="hoodie":
+         productprice=8
+    if title=="casquette":
+         productprice=2
+    if title=='t-shirt':
+        productprice=4
+    if title=='sweat':
+        productprice=6
+    tax=2
+    priceprint=0
+    productvariable=0
+    if color is None:
+                color=0
+    if lettragecoeur is None:
+        lettragecoeur=0
+    if lettragedos is None:
+        lettragedos=0
+    if coeur is None:
+        coeur=0
+    if carre is None:
+        carre=0
+    if big is None:
+        big=0
 
-            marge=form.marge.data
-            if marge is None:
-                marge=0
-            if title=="hoodie":
-                 productprice=8
-            if title=="casquette":
-                 productprice=2
-            if title=='t-shirt':
-                productprice=4
-            if title=='sweat':
-                productprice=6
-            tax=2
-            priceprint=0
-            productvariable=0
-            if color is None:
-                        color=0
 
-
-
+    if printype=="impression":
+            coeur=lettragecoeur+coeur
+            carre=lettragedos+carre
             if lock==True:
-                    if coeur==0 and carre==0 and big==1:
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==0 and carre==1 and big==0:
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==1 and carre==0 and big==1:
+                    if coeur>0 or carre>0 or big>0:
+                        if coeur==0 and carre==0 and big==1:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==0 and carre==1 and big==0:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==1 and carre==0 and big==1:
 
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==1 and carre==1 and big==0:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==1 and carre==1 and big==0:
 
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==2 and carre==1 and big==0:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==2 and carre==1 and big==0:
 
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==4 and carre==0 and big==0:
-                        size=4
-                        produitparfeuille=1
-                    elif coeur==2 and carre==1 and big==0:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==4 and carre==0 and big==0:
+                            size=4
+                            produitparfeuille=1
+                        elif coeur==2 and carre==1 and big==0:
 
-                        size=3
-                        produitparfeuille=1
-                    #feuille A3 et une seuille feuilleparproduit
-                    elif coeur==0 and carre==0 and big==2:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==0 and carre==1 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==0 and carre==2 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==1 and carre==2 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==1 and carre==1 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==2 and carre==0 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==2 and carre==2 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==2 and carre==1 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==3 and carre==0 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==3 and carre==2 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==4 and carre==0 and big==1:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==3 and carre==1 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==4 and carre==1 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    elif coeur==4 and carre==2 and big==0:
-                        size=3
-                        produitparfeuille=1
-                    #autres exeptions
-                    elif coeur==1 and carre==0 and  big==0:
-                         size=4
-                         produitparfeuille=6
-                    elif coeur==2 and carre==0 and  big==0:
-                         size=4
-                         produitparfeuille=3
-                    elif coeur==3 and carre==0 and  big==0:
-                         size=4
-                         produitparfeuille=int(2)
+                            size=3
+                            produitparfeuille=1
+                        #feuille A3 et une seuille feuilleparproduit
+                        elif coeur==0 and carre==0 and big==2:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==0 and carre==1 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==0 and carre==2 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==1 and carre==2 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==1 and carre==1 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==2 and carre==0 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==2 and carre==2 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==2 and carre==1 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==3 and carre==0 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==3 and carre==2 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==4 and carre==0 and big==1:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==3 and carre==1 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==4 and carre==1 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        elif coeur==4 and carre==2 and big==0:
+                            size=3
+                            produitparfeuille=1
+                        #autres exeptions
+                        elif coeur==1 and carre==0 and  big==0:
+                             size=4
+                             produitparfeuille=6
+                        elif coeur==2 and carre==0 and  big==0:
+                             size=4
+                             produitparfeuille=3
+                        elif coeur==3 and carre==0 and  big==0:
+                             size=4
+                             produitparfeuille=int(2)
+                        else:
+                            produitparfeuille=10
+                            quantity=10
+
+                        print("produitpar feuille "+str(produitparfeuille))
+                        quantityfeuille=float(quantity)/float(produitparfeuille)
+                        print("2- after calc"+str(quantityfeuille))
+
                     else:
-                        produitparfeuille=10
-                        quantity=10
-            quantityfeuille=float(quantity)/float(produitparfeuille)
+                        produitparfeuille=0
+                        quantityfeuille=0
+                    print("produit par feuille else"+str(produitparfeuille))
             if lock==True:
-                                   if color is None:
-                                        color=0
-                                        color=int(O)
 
                                    if color==1:
-                                      if quantityfeuille<=15:
+                                      if quantityfeuille >0 and quantityfeuille<=15:
                                                quantityfeuille=15
                                       elif quantityfeuille>15 and quantityfeuille<=20:
                                                quantityfeuille=20
@@ -199,7 +234,7 @@ def bot(name):
                                       elif quantityfeuille>30:
                                          size=3
                                    elif color>=2:
-                                      if quantityfeuille<=6:
+                                      if quantityfeuille<=6 and quantityfeuille>0:
                                           quantityfeuille=10
                                       if quantityfeuille>6 and quantityfeuille<=10 :
                                          quantityfeuille=10
@@ -211,108 +246,197 @@ def bot(name):
                                          quantityfeuille=30
                                       elif quantityfeuille>30:
                                          size=3
+            print("3- after calc"+str(quantityfeuille))
+            print("size"+str(size))
+
             if lock==True:
 
-                     if color==1:
-                          if size==4:
-                            if quantityfeuille==15:
-                                        feuilleprice=25
-                            elif quantityfeuille==20:
-                                        feuilleprice=32
-                            elif quantityfeuille==25:
-                              feuilleprice=38
-                            elif quantityfeuille==30:
-                              feuilleprice=45
-                          elif size==3:
-                              if quantityfeuille==15:
-                                 feuilleprice=45
-                              elif quantityfeuille==20:
-                                 feuilleprice=59
-                              elif quantityfeuille==25:
-                                 feuilleprice=68
-                              elif quantityfeuille==30:
-                                 feuilleprice=76
-                              elif quantityfeuille==35:
-                                 feuilleprice=84
-                              elif quantityfeuille==40:
-                                 feuilleprice=94
-                              elif quantityfeuille==45:
-                                 feuilleprice=98
-                              elif quantityfeuille==50:
-                                feuilleprice=107
-                     elif color!=1:
-                          if size==4:
-                              if quantityfeuille==1:
-                                feuilleprice=10.50
-                              if quantityfeuille>1 and quantityfeuille<=6:
-                                size=3
-                                quantityfeuille=int(quantityfeuille/2)
-                                if quantityfeuille==3:
-                                        feuilleprice=45.46
-                                if quantityfeuille==4:
-                                        feuilleprice=60.48
-                                if quantityfeuille==5:
-                                        feuilleprice=75.60
-                                if quantityfeuille==6:
-                                        feuilleprice=90.72
-                              if quantityfeuille>6:
-                                size=3
-                                quantityfeuille=int(quantityfeuille/2)
-                                if quantityfeuille>6 and quantityfeuille<=10:
-                                      feuilleprice=89.50
-                                if quantityfeuille>10 and quantityfeuille<=15:
-                                      feuilleprice=102
-                                if quantityfeuille>15 and quantityfeuille<=21:
-                                      feuilleprice=107
-                                if quantityfeuille>21 and quantityfeuille<=25:
-                                      feuilleprice=127
-                                if quantityfeuille>25 and quantityfeuille<=30:
-                                      feuilleprice=153
-                                if quantityfeuille>30 and quantityfeuille<=35:
-                                      feuilleprice=178
-                          if size==3:
-                                   if quantityfeuille==1:
-                                           feuilleprice=15.12
-                                   if quantityfeuille==2:
-                                           feuilleprice=30.24
-                                   if quantityfeuille==3:
-                                           feuilleprice=45.46
-                                   if quantityfeuille==4:
-                                           feuilleprice=60.48
-                                   if quantityfeuille==5:
-                                           feuilleprice=75.60
-                                   if quantityfeuille==6:
-                                           feuilleprice=90.72
+                  if quantityfeuille>0:
+                             if color==1:
+                                  if size==4:
+                                    if quantityfeuille==15:
+                                                feuilleprice=25
+                                    elif quantityfeuille==20:
+                                                feuilleprice=32
+                                    elif quantityfeuille==25:
+                                      feuilleprice=38
+                                    elif quantityfeuille==30:
+                                      feuilleprice=45
+                                  elif size==3:
+                                      if quantityfeuille==15:
+                                         feuilleprice=45
+                                      elif quantityfeuille==20:
+                                         feuilleprice=59
+                                      elif quantityfeuille==25:
+                                         feuilleprice=68
+                                      elif quantityfeuille==30:
+                                         feuilleprice=76
+                                      elif quantityfeuille==35:
+                                         feuilleprice=84
+                                      elif quantityfeuille==40:
+                                         feuilleprice=94
+                                      elif quantityfeuille==45:
+                                         feuilleprice=98
+                                      elif quantityfeuille==50:
+                                        feuilleprice=107
+                             elif color!=1:
+                                  if size==4:
+                                      if quantityfeuille==1:
+                                        feuilleprice=10.50
+                                      if quantityfeuille>1 and quantityfeuille<=6:
+                                        size=3
+                                        quantityfeuille=int(quantityfeuille/2)
+                                        if quantityfeuille==3:
+                                                feuilleprice=45.46
+                                        if quantityfeuille==4:
+                                                feuilleprice=60.48
+                                        if quantityfeuille==5:
+                                                feuilleprice=75.60
+                                        if quantityfeuille==6:
+                                                feuilleprice=90.72
+                                      if quantityfeuille>6:
+                                        size=3
+                                        quantityfeuille=int(quantityfeuille/2)
+                                        if quantityfeuille>6 and quantityfeuille<=10:
+                                              feuilleprice=89.50
+                                        if quantityfeuille>10 and quantityfeuille<=15:
+                                              feuilleprice=102
+                                        if quantityfeuille>15 and quantityfeuille<=21:
+                                              feuilleprice=107
+                                        if quantityfeuille>21 and quantityfeuille<=25:
+                                              feuilleprice=127
+                                        if quantityfeuille>25 and quantityfeuille<=30:
+                                              feuilleprice=153
+                                        if quantityfeuille>30 and quantityfeuille<=35:
+                                              feuilleprice=178
+                                  if size==3:
+                                           if quantityfeuille==1:
+                                                   feuilleprice=15.12
+                                           if quantityfeuille==2:
+                                                   feuilleprice=30.24
+                                           if quantityfeuille==3:
+                                                   feuilleprice=45.46
+                                           if quantityfeuille==4:
+                                                   feuilleprice=60.48
+                                           if quantityfeuille==5:
+                                                   feuilleprice=75.60
+                                           if quantityfeuille==6:
+                                                   feuilleprice=90.72
 
 
-                                   if quantityfeuille>6 and quantityfeuille<=10:
-                                       feuilleprice=89.50
-                                   if quantityfeuille>10 and quantityfeuille<=15:
-                                       feuilleprice=102
-                                   if quantityfeuille>15 and quantityfeuille<=21:
-                                       feuilleprice=107
-                                   if quantityfeuille>22 and quantityfeuille<=23:
-                                       feuilleprice=112
-                                   if quantityfeuille>22 and quantityfeuille<=23:
-                                        feuilleprice=117
-                                   if quantityfeuille>21 and quantityfeuille<=24:
-                                       feuilleprice=122
-                                   if quantityfeuille>24 and quantityfeuille<=41:
-                                       feuilleprice=127
-                                   if quantityfeuille>41 and quantityfeuille<=45:
-                                         feuilleprice=139
-                                   if quantityfeuille>45 and quantityfeuille<=61:
-                                       feuilleprice=150
-                                   else:
-                                       feuilleprice=1
-            feuilleprice=feuilleprice+9+0.80*quantity
-            priceprint=feuilleprice
-            tot=quantity*productprice+priceprint
-            totTVA=tot+tot*tax/10
+                                           if quantityfeuille>6 and quantityfeuille<=10:
+                                               feuilleprice=89.50
+                                           if quantityfeuille>10 and quantityfeuille<=15:
+                                               feuilleprice=102
+                                           if quantityfeuille>15 and quantityfeuille<=21:
+                                               feuilleprice=107
+                                           if quantityfeuille>22 and quantityfeuille<=23:
+                                               feuilleprice=112
+                                           if quantityfeuille>22 and quantityfeuille<=23:
+                                                feuilleprice=117
+                                           if quantityfeuille>21 and quantityfeuille<=24:
+                                               feuilleprice=122
+                                           if quantityfeuille>24 and quantityfeuille<=41:
+                                               feuilleprice=127
+                                           if quantityfeuille>41 and quantityfeuille<=45:
+                                                 feuilleprice=139
+                                           if quantityfeuille>45 and quantityfeuille<=61:
+                                               feuilleprice=150
 
-            tot=tot*(float(marge)+100)/100
-            tot=round(tot,2)
-            PU=tot/quantity
-            PU=round(PU,2)             
-            return render_template('bot.html', name=name, form=form, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
-    return render_template('bot.html', name=name, form=form,, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU)
+                             print("feuilleprice"+str(feuilleprice))
+                             feuilleprice=feuilleprice+9+0.80*quantity
+                             priceprint=feuilleprice
+                  else:
+                           priceprint=0
+
+
+            print("number of color "+str(color))
+            print("price of print " +str(priceprint))
+            print(" number of feuille " +str(quantityfeuille))
+    elif printype=="broderie":
+          priceprint=0
+          logodos=carre
+          logocoeur=coeur
+          logodos=logodos+big
+          if lettragecoeur>0:
+              lettragecoeur=lettragecoeur*quantity
+              if lettragecoeur<=9:
+                  priceprint=7.5
+              elif lettragecoeur>9 and lettragecoeur<=24:
+                  priceprint=3.50
+              elif lettragecoeur>24 and lettragecoeur<=49:
+                  priceprint=2.50
+              elif lettragecoeur>49 and lettragecoeur<149:
+                  priceprint=1.80
+              elif lettragecoeur>149 and lettragecoeur<499:
+                  priceprint=1.50
+              elif lettragecoeur>499 and lettragecoeur<2000:
+                  priceprint=1.30
+              else:print('sur devis')
+              frais=0
+              frais=frais+30
+
+          if logocoeur>0:
+              logocoeur=logocoeur*quantity
+              if logocoeur<=9:
+                  priceprint=priceprint+10
+              elif logocoeur>9 and logocoeur<=24:
+                  priceprint=priceprint+4.50
+              elif logocoeur>24 and logocoeur<=49:
+                  priceprint=priceprint+3.50
+              elif logocoeur>49 and logocoeur<149:
+                  priceprint=priceprint+3
+              elif logocoeur>149 and logocoeur<499:
+                  priceprint=priceprint+2.50
+              elif logocoeur>499 and logocoeur<2000:
+                  priceprint=priceprint+2
+              else:print('sur devis')
+              frais=frais+40
+          if lettragedos>0:
+                 lettragedos=lettragedos*quantity
+                 if lettragedos<=9:
+                     priceprint=priceprint+15
+                 elif lettragedos>9 and lettragedos<=24:
+                     priceprint=priceprint+7
+                 elif lettragedos>24 and lettragedos<=49:
+                     priceprint=priceprint+5
+                 elif lettragedos>49 and lettragedos<149:
+                     priceprint=priceprint+3.5
+                 elif lettragedos>149 and lettragedos<499:
+                     priceprint=priceprint+3
+                 elif lettragedos>499 and lettragedos<2000:
+                     priceprint=priceprint+2.50
+                 else:print('sur devis')
+                 frais=frais+50
+          if logodos>0:
+               logodos=logodos*quantity
+               if logodos<=9:
+                   priceprint=priceprint+15
+               elif logodos>9 and logodos<=24:
+                   priceprint=priceprint+7
+               elif logodos>24 and logodos<=49:
+                   priceprint=priceprint+5
+               elif logodos>49 and logodos<149:
+                   priceprint=priceprint+3.5
+               elif logodos>149 and logodos<499:
+                   priceprint=priceprint+3
+               elif logodos>499 and logodos<2000:
+                   priceprint=priceprint+2.50
+               else:print('sur devis')
+               frais=frais+70
+          priceprint=priceprint*quantity+frais+10
+
+
+    tot=quantity*productprice+priceprint
+    totnoprofit=tot
+    tot=tot*(float(marge)+100)/100
+    totTVA=tot+tot*tax/10
+    totTVA=round(totTVA,2)
+
+
+    tot=round(tot,2)
+    PU=tot/quantity
+    PU=round(PU,2)
+    profit=tot-totnoprofit
+    profit=round(profit,2)
+    return render_template('bot.html', name=name, form=form, quantity=form.quantity.data, tot=tot, totTVA=totTVA, lettragecoeur=lettragecoeur,coeur=coeur,carre=carre,big=big, produitparfeuille=produitparfeuille, feuilleprice=feuilleprice,color=color,PU=PU,priceprint=priceprint, profit=profit)
