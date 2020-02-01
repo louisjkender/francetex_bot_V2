@@ -3,7 +3,8 @@
 
 
 {% block navbar %}
-<body style="padding-left:200px; padding-right:200px;">
+
+<body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -24,6 +25,7 @@
 
 
 {% block content %}
+<div style="padding-left:200px; padding-right:200px;padding-top:30px;">
 <h1>Hello, {{name}}</h1>
 {% import "bootstrap/wtf.html" as wtf %}
 <form method=post action="">
@@ -35,21 +37,46 @@
 </div>
 
 {{ wtf.form_field(form.printype) }}
-
 <div style='display:flex; justify-content:space-between'>
-
+  <div style"=flex:30%">{{ wtf.form_field(form.lettragecoeur) }}</div>
+  <div style"=flex:30%">{{ wtf.form_field(form.lettragedos) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.coeur) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.carre) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.big) }}</div>
-</div>
-{{ wtf.form_field(form.marge) }}
-{{ wtf.form_field(form.submit) }}
-<p style="margin-top:20px;">{% if quantity!=None %}TOTAL HT {{tot}}€{% else %}Rentrer une quantité{% endif %}</p>
-<p>TOTAL TTC {{tot}}€</p>
-<p>Prix unitaire HT {{PU}}</p>
 
+</div>
+
+
+
+
+<div style="background-color:white; position: fixed;
+  bottom: 0;
+
+  align-items: center;
+  width: 1000px; background-color:#dce0e3;border-radius:10px 10px 0px 0px">
+  <div style="display:flex;justify-content:space-around;align-items:center;margin-top:20px;margin-bottom:10px;">
+    <div>
+            {{ wtf.form_field(form.marge) }}
+    </div>
+   <div>
+
+       {{ wtf.form_field(form.submit) }}
+
+    </div>
+    <div>
+<p >{% if quantity!=None %}TOTAL HT {{tot}}€{% else %}Rentrer une quantité{% endif %}</p>
+<p>TOTAL TTC {{totTVA}}€</p>
+</div>
+<div>
+  <p>Prix unitaire HT {{PU}}</p>
+  <p>Bénéfice HT {{profit}}</p>
+</div>
+</div>
+</div>
+</div>
 
 
 {% endblock %}
 
 </form>
+<div>
