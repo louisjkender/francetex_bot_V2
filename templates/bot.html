@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Bot Francetex{% endblock %}
+{% block title %}Flasky{% endblock %}
 
 
 {% block navbar %}
@@ -36,14 +36,23 @@
 
 </div>
 
-{{ wtf.form_field(form.printype) }}
-<div style='display:flex; justify-content:space-between'>
-  <div style"=flex:30%">{{ wtf.form_field(form.lettragecoeur) }}</div>
-  <div style"=flex:30%">{{ wtf.form_field(form.lettragedos) }}</div>
+<div style='display:flex; justify-content:space-between;'>
+<div style="padding:10 10 10 10">
+    <p><strong>Broderies</strong></p>
+    <div style='display:flex; justify-content:space-between;padding-left:30px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;'>
+  <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.lettragecoeur) }}</div>
+  <div style"=flex:20%;margin:100px;">{{ wtf.form_field(form.lettragedos) }}</div>
+    <div style"=flex:20%;margin:10px;">{{ wtf.form_field(form.surnom) }}</div>
+  </div>
+</div>
+<div>
+  <p style="padding-left:10px"><strong>Impressions</strong></p>
+<div style="display:flex; justify-content:space-between;padding-left:30px;margin-left: 10px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;">
 <div style"=flex:30%">{{ wtf.form_field(form.coeur) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.carre) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.big) }}</div>
-
+</div>
+</div>
 </div>
 
 
