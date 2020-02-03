@@ -38,7 +38,7 @@ class NameForm(FlaskForm):
 
 
 class FormDevis(FlaskForm):
-        title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'hoodie'),('casquette', 'casquette'),('t-shirt','t-shirt'),('sweat','sweat')])
+        title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'Sweat à capuche'),('casquetteTrucker', 'Casquette Trucker'),('casquettebaseball', 'Casquette Tissus Baseball'),('bonnet', 'Bonnet'),('t-shirt','t-shirt'),('sweat','sweat'),('TPB','T-shirt premium bio'),('polo','Polo')])
         quantity = IntegerField('Quantité?', validators=[NumberRange(min=0, max=1000)])
         printype=SelectField('Quelle impression souhaitez-vous', [DataRequired()], choices=[('impression', 'impression'),('broderie', 'broderie')])
         lettragecoeur = IntegerField('lettrage coeur?', validators=[NumberRange(min=0, max=10)])
@@ -46,7 +46,7 @@ class FormDevis(FlaskForm):
         coeur = IntegerField('logo coeur?', validators=[NumberRange(min=0, max=10)])
         carre = IntegerField('logo carre?', validators=[NumberRange(min=0, max=10)])
         big = IntegerField('logo A4?', validators=[NumberRange(min=0, max=10)])
-        color=IntegerField('Combien de couleur', validators=[NumberRange(min=0, max=10)])
+        color=SelectField('Nombre de couleur logo', [DataRequired()], choices=[('1', '1'),('2', 'Multi')])
         marge=IntegerField('Marge bénéficiaire (%+)', validators=[NumberRange(min=0, max=100)])
         submit = SubmitField('Calculer')
 
@@ -80,6 +80,11 @@ def bot(name):
     marge=0
     lettragedos=0
     color=form.color.data
+    if color=="1":
+        color=1
+    elif color=="2":
+        color=2
+
     quantity=form.quantity.data
     lettragecoeur=form.lettragecoeur.data
     coeur=form.coeur.data
@@ -89,7 +94,7 @@ def bot(name):
     priceprint=0
     printype=form.printype.data
     marge=form.marge.data
-    lettragedos=form.marge.data
+    lettragedos=form.lettragedos.data
     if lettragecoeur is None:
         lettragecoeur=0
     if marge is None:
@@ -101,13 +106,22 @@ def bot(name):
     if priceprint is None:
         priceprint=0
     if title=="hoodie":
-         productprice=8
-    if title=="casquette":
-         productprice=2
+         productprice=7.5
+    if title=="TPB":
+        productprice=3.59
+    if title=="casquetteTrucker":
+         productprice=1.49
+    if title=="casquettebaseball":
+         productprice=2.05
     if title=='t-shirt':
-        productprice=4
+        productprice=1.92
     if title=='sweat':
-        productprice=6
+        productprice=5.35
+    if title=='bonnet':
+        productprice=1.40
+    if title=='polo':
+        productprice=3.44
+
     tax=2
     priceprint=0
     productvariable=0
