@@ -49,6 +49,8 @@ class FormDevis(FlaskForm):
         color=SelectField('Nombre de couleur logo', [DataRequired()], choices=[('1', '1'),('2', 'Multi')])
         marge=IntegerField('Marge bénéficiaire (%+)', validators=[NumberRange(min=0, max=100)])
         submit = SubmitField('Calculer')
+        logocoeur=IntegerField('logo coeur', validators=[NumberRange(min=0, max=100)])
+        logodos=IntegerField('logo dos', validators=[NumberRange(min=0, max=100)])
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -100,10 +102,16 @@ def bot(name):
     big=form.big.data
     title=form.title.data
     surnom=form.surnom.data
+    logocoeur=form.logocoeur.data
+    logodos=form.logodos.data
     priceprint=0
 
     marge=form.marge.data
     lettragedos=form.lettragedos.data
+    if logocoeur is None:
+        logocoeur=0
+    if logodos is None:
+        logodos=0
     if lettragecoeur is None:
         lettragecoeur=0
     if surnom is None:
@@ -237,14 +245,14 @@ def bot(name):
             produitparfeuille=10
             quantity=10
 
-        print("produitpar feuille "+str(produitparfeuille))
+
         quantityfeuille=float(quantity)/float(produitparfeuille)
-        print("2- after calc"+str(quantityfeuille))
+
 
     else:
         produitparfeuille=0
         quantityfeuille=0
-    print("produit par feuille else"+str(produitparfeuille))
+
     if lock==True:
 
                        if color==1:
@@ -271,8 +279,7 @@ def bot(name):
                              quantityfeuille=30
                           elif quantityfeuille>30:
                              size=3
-    print("3- after calc"+str(quantityfeuille))
-    print("size"+str(size))
+
 
     if lock==True:
 
@@ -368,7 +375,7 @@ def bot(name):
                                if quantityfeuille>45 and quantityfeuille<=61:
                                    feuilleprice=150
 
-                 print("feuilleprice"+str(feuilleprice))
+
                  feuilleprice=feuilleprice+9+0.80*quantity
                  priceprint=feuilleprice
       else:
@@ -382,6 +389,9 @@ def bot(name):
 
     if lettragecoeur>0 or logocoeur>0 or lettragedos>0 or logodos>0 or surnom>0:
         priceprintimpression=priceprint
+        priceprint=0
+
+
         if lettragecoeur>0:
           lettragecoeur=lettragecoeur*quantity
           if lettragecoeur<=9:
@@ -399,9 +409,9 @@ def bot(name):
           else:print('sur devis')
           frais=0
           frais=frais+30
-
         if logocoeur>0:
           logocoeur=logocoeur*quantity
+
           if logocoeur<=9:
               priceprint=priceprint+10
           elif logocoeur>9 and logocoeur<=24:
@@ -415,6 +425,8 @@ def bot(name):
           elif logocoeur>499 and logocoeur<2000:
               priceprint=priceprint+2
           else:print('sur devis')
+          print(frais)
+          print(priceprint)
           frais=frais+40
         if lettragedos>0:
              lettragedos=lettragedos*quantity
@@ -432,6 +444,7 @@ def bot(name):
                  priceprint=priceprint+2.50
              else:print('sur devis')
              frais=frais+50
+        print(priceprint)
         if logodos>0:
            logodos=logodos*quantity
            if logodos<=9:
@@ -448,7 +461,7 @@ def bot(name):
                priceprint=priceprint+2.50
            else:print('sur devis')
            frais=frais+70
-
+        print(priceprint)
         if surnom >0:
             if surnom==1:
                 surnom=quantity
@@ -476,10 +489,12 @@ def bot(name):
                 elif surnoms>49 and surnom<=200:
                     priceprint=priceprint+2.5+5
 
-
+        print(priceprint)
         priceprint=priceprint*quantity+frais+10
 
+
     tot=quantity*productprice+priceprint+priceprintimpression
+    print(priceprint)
     totnoprofit=tot
     tot=tot*(float(marge)+100)/100
     totTVA=tot+tot*tax/10
