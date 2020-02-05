@@ -34,14 +34,17 @@
   <div >{{ wtf.form_field(form.color) }}</div>
   <div >{{ wtf.form_field(form.quantity) }}</div>
 
-</div> 
+</div>
 
 <div style='display:flex; justify-content:space-between;'>
-<div style="padding:10 10 10 10">
+<div style="padding:10 10 10 10;flex:80%;">
     <p><strong>Broderies</strong></p>
     <div style='display:flex; justify-content:space-between;padding-left:30px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;'>
   <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.lettragecoeur) }}</div>
+    <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.logocoeur) }}</div>
+
   <div style"=flex:20%;margin:100px;">{{ wtf.form_field(form.lettragedos) }}</div>
+  <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.logodos) }}</div>
     <div style"=flex:20%;margin:10px;">{{ wtf.form_field(form.surnom) }}</div>
   </div>
 </div>
@@ -89,3 +92,4 @@
 
 </form>
 <div>
+
