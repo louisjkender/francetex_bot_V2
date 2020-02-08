@@ -3,6 +3,48 @@
 
 
 {% block navbar %}
+<style>
+
+.francetex_maincontainer{
+  padding-left:200px; padding-right:200px;padding-top:30px;
+
+}
+
+.francetex_flex_between{
+display:flex; justify-content:space-between;
+}
+
+.francetex_flex_around{
+display:flex; justify-content:space-around;
+}
+
+.francetex_quote_bottom{
+width:800px;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .francetex_maincontainer{
+  padding-left:40px; padding-right:40px;padding-top:10px;margin-bottom:300px;
+  }
+  .francetex_flex_around{
+  display:block;
+  }
+  .francetex_flex_between{
+  display:block;
+  }
+  .francetex_quote_bottom{
+  width:70%;
+  padding-left: 30px;padding-right: 30px;
+  }
+  .francetex_none{
+    display: none;
+  }
+
+}
+
+
+</style>
 
 <body>
 <nav class="navbar navbar-default">
@@ -12,7 +54,7 @@
   filter: brightness(0.98);margin-top:2px;'>
 
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav francetex_none">
       <li class="active"><a href="#">Acceuil</a></li>
       <li><a href="#">infos</a></li>
       <li><a href="#">Nos engagements</a></li>
@@ -25,7 +67,7 @@
 
 
 {% block content %}
-<div style="padding-left:200px; padding-right:200px;padding-top:30px;">
+<div class="francetex_maincontainer">
 <h1>Hello, {{name}}</h1>
 {% import "bootstrap/wtf.html" as wtf %}
 <form method=post action="">
@@ -36,10 +78,10 @@
 
 </div>
 
-<div style='display:flex; justify-content:space-between;'>
+<div class='francetex_flex_between'>
 <div style="padding:10 10 10 10;flex:80%;">
     <p><strong>Broderies</strong></p>
-    <div style='display:flex; justify-content:space-between;padding-left:30px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;'>
+    <div class='francetex_flex_between'style=';padding-left:30px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;'>
   <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.lettragecoeur) }}</div>
     <div style"=width:20px;border-width:10px;">{{ wtf.form_field(form.logocoeur) }}</div>
 
@@ -50,7 +92,7 @@
 </div>
 <div>
   <p style="padding-left:10px"><strong>Impressions</strong></p>
-<div style="display:flex; justify-content:space-between;padding-left:30px;margin-left: 10px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;">
+<div class="francetex_flex_between"style="padding-left:30px;margin-left: 10px;padding-right:30px;padding-top:10px;padding-bottom: 10px;background-color:#f5f5f5;border-radius:8px;">
 <div style"=flex:30%">{{ wtf.form_field(form.coeur) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.carre) }}</div>
 <div style"=flex:30%">{{ wtf.form_field(form.big) }}</div>
@@ -61,12 +103,13 @@
 
 
 
-<div style="background-color:white; position: fixed;
+<div class="francetex_quote_bottom"style="background-color:white; position: fixed;
   bottom: 0;
 
   align-items: center;
-  width: 1000px; background-color:#dce0e3;border-radius:10px 10px 0px 0px">
-  <div style="display:flex;justify-content:space-around;align-items:center;margin-top:20px;margin-bottom:10px;">
+ background-color:#dce0e3;border-radius:10px 10px 0px 0px">
+
+  <div class="francetex_flex_around"style="align-items:center;margin-top:20px;margin-bottom:10px;">
     <div>
             {{ wtf.form_field(form.marge) }}
     </div>
@@ -92,4 +135,3 @@
 
 </form>
 <div>
-
