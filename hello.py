@@ -242,11 +242,12 @@ def bot(name):
              size=4
              produitparfeuille=int(2)
         else:
-            produitparfeuille=10
+            produitparfeuille=1
             quantity=10
 
 
         quantityfeuille=float(quantity)/float(produitparfeuille)
+        print("quantity" +str(quantity))
 
 
     else:
@@ -280,7 +281,7 @@ def bot(name):
                           elif quantityfeuille>30:
                              size=3
 
-
+    print(size)
     if lock==True:
 
       if quantityfeuille>0:
@@ -301,16 +302,32 @@ def bot(name):
                              feuilleprice=59
                           elif quantityfeuille==25:
                              feuilleprice=68
-                          elif quantityfeuille==30:
+                          elif quantityfeuille>25 and quantityfeuille<=30:
                              feuilleprice=76
-                          elif quantityfeuille==35:
+                          elif quantityfeuille>30 and quantityfeuille<=35:
                              feuilleprice=84
-                          elif quantityfeuille==40:
+                          elif quantityfeuille>35 and quantityfeuille<=40:
                              feuilleprice=94
-                          elif quantityfeuille==45:
+                          elif quantityfeuille>40 and  quantityfeuille<=50:
                              feuilleprice=98
                           elif quantityfeuille==50:
                             feuilleprice=107
+                          elif quantityfeuille>50 and quantityfeuille <=60:
+                             feuilleprice=120
+                          elif quantityfeuille>60 and quantityfeuille <=70:
+                              feuilleprice=134
+                          elif quantityfeuille>70 and quantityfeuille <=80:
+                                 feuilleprice=146
+                          elif quantityfeuille>80 and quantityfeuille <=90:
+                               feuilleprice=152
+                          elif quantityfeuille>90 and quantityfeuille <=100:
+                               feuilleprice=162
+                          elif quantityfeuille>100 and quantityfeuille <=125:
+                               feuilleprice=185
+                          elif quantityfeuille>125 and quantityfeuille <=150:
+                               feuilleprice=215
+                          elif quantityfeuille>150 and quantityfeuille <=175:
+                               feuilleprice=235
                  elif color!=1:
                       if size==4:
                           if quantityfeuille==1:
@@ -372,10 +389,32 @@ def bot(name):
                                    feuilleprice=127
                                if quantityfeuille>41 and quantityfeuille<=45:
                                      feuilleprice=139
-                               if quantityfeuille>45 and quantityfeuille<=61:
-                                   feuilleprice=150
+                               if quantityfeuille>45 and quantityfeuille<61:
+                                   feuilleprice=158
+                               elif quantityfeuille>60 and quantityfeuille <=70:
+                                      feuilleprice=182
+                               elif quantityfeuille>70 and quantityfeuille <=80:
+                                      feuilleprice=208
+                               elif quantityfeuille>80 and quantityfeuille <=100:
+                                    feuilleprice=220
+                               elif quantityfeuille>100 and quantityfeuille <=110:
+                                    feuilleprice=242
+                               elif quantityfeuille>110 and quantityfeuille <=120:
+                                    feuilleprice=264
+                               elif quantityfeuille>120 and quantityfeuille <=130:
+                                    feuilleprice=286
+                               elif quantityfeuille>130 and quantityfeuille <=145:
+                                    feuilleprice=319
 
+                               elif quantityfeuille>145 and quantityfeuille <=160:
+                                   feuilleprice=352
 
+                               elif quantityfeuille>160 and quantityfeuille <=200:
+                                   feuilleprice=380
+                               elif quantityfeuille>200 and quantityfeuille <=300:
+                                   feuilleprice=575
+
+                 print("feuilleprice only "+str(feuilleprice))
                  feuilleprice=feuilleprice+9+0.80*quantity
                  priceprint=feuilleprice
       else:
@@ -494,7 +533,7 @@ def bot(name):
 
 
     tot=quantity*productprice+priceprint+priceprintimpression
-    print(priceprint)
+    print(quantity*productprice)
     totnoprofit=tot
     tot=tot*(float(marge)+100)/100
     totTVA=tot+tot*tax/10
