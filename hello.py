@@ -38,7 +38,7 @@ class NameForm(FlaskForm):
 
 
 class FormDevis(FlaskForm):
-        title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'Sweat à capuche'),('casquetteTrucker', 'Casquette Trucker'),('casquettebaseball', 'Casquette Tissus Baseball'),('bonnet', 'Bonnet'),('t-shirt','t-shirt'),('sweat','sweat'),('TPB','T-shirt premium bio'),('polo','Polo'),('sans produit','sans produit'])
+        title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'Sweat à capuche'),('casquetteTrucker', 'Casquette Trucker'),('casquettebaseball', 'Casquette Tissus Baseball'),('bonnet', 'Bonnet'),('t-shirt','t-shirt'),('sweat','sweat'),('TPB','T-shirt premium bio'),('polo','Polo'),('sans produit','sans produit')])
         quantity = IntegerField('Quantité?', validators=[NumberRange(min=0, max=1000)])
         surnom=SelectField('Surnoms', [DataRequired()], choices=[(0, 'Aucun'),(1, 'Dos'),(2, 'Coeur'),(3, 'Les deux')])
         lettragecoeur = IntegerField('lettrage coeur?', validators=[NumberRange(min=0, max=10)])
