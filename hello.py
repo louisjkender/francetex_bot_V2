@@ -490,17 +490,17 @@ def bot(name):
         if logodos>0:
            logodos=logodos*quantity
            if logodos<=9:
-               priceprint=priceprint+15
+               priceprint=priceprint+18
            elif logodos>9 and logodos<=24:
-               priceprint=priceprint+7
+               priceprint=priceprint+9
            elif logodos>24 and logodos<=49:
-               priceprint=priceprint+5
+               priceprint=priceprint+7.50
            elif logodos>49 and logodos<149:
-               priceprint=priceprint+3.5
+               priceprint=priceprint+6.5
            elif logodos>149 and logodos<499:
-               priceprint=priceprint+3
+               priceprint=priceprint+5.5
            elif logodos>499 and logodos<2000:
-               priceprint=priceprint+2.50
+               priceprint=priceprint+4.50
            else:print('sur devis')
            frais=frais+70
         print(priceprint)
