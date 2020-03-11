@@ -435,72 +435,72 @@ def bot(name):
 
 
         if lettragecoeur>0:
-          lettragecoeur=lettragecoeur*quantity
-          if lettragecoeur<=9:
-              priceprint+=7.5
-          elif lettragecoeur>9 and lettragecoeur<=24:
-              priceprint+=3.50
-          elif lettragecoeur>24 and lettragecoeur<=49:
-              priceprint+=2.50
-          elif lettragecoeur>49 and lettragecoeur<149:
-              priceprint+=1.80
-          elif lettragecoeur>149 and lettragecoeur<499:
-              priceprint+=1.50
-          elif lettragecoeur>499 and lettragecoeur<2000:
-              priceprint+=1.30
+          lettragecoeurN=lettragecoeur*quantity
+          if lettragecoeurN<=9:
+              priceprint+=7.5*lettragecoeur
+          elif lettragecoeurN>9 and lettragecoeurN<=24:
+              priceprint+=3.50*lettragecoeur
+          elif lettragecoeurN>24 and lettragecoeurN<=49:
+              priceprint+=2.50*lettragecoeur
+          elif lettragecoeurN>49 and lettragecoeurN<149:
+              priceprint+=1.80*lettragecoeur
+          elif lettragecoeurN>149 and lettragecoeurN<499:
+              priceprint+=1.50*lettragecoeur
+          elif lettragecoeurN>499 and lettragecoeurN<2000:
+              priceprint+=1.30*lettragecoeur
           else:print('sur devis')
           frais=0
           frais=frais+30
         if logocoeur>0:
-          logocoeur=logocoeur*quantity
+          logocoeurN=logocoeur*quantity
 
-          if logocoeur<=9:
-              priceprint=priceprint+10
-          elif logocoeur>9 and logocoeur<=24:
-              priceprint=priceprint+4.50
-          elif logocoeur>24 and logocoeur<=49:
-              priceprint=priceprint+3.50
-          elif logocoeur>49 and logocoeur<149:
-              priceprint=priceprint+3
-          elif logocoeur>149 and logocoeur<499:
-              priceprint=priceprint+2.50
-          elif logocoeur>499 and logocoeur<2000:
-              priceprint=priceprint+2
+          if logocoeurN<=9:
+              priceprint=priceprint+10*logocoeur
+          elif logocoeurN>9 and logocoeurN<=24:
+              priceprint=priceprint+4.50*logocoeur
+          elif logocoeurN>24 and logocoeurN<=49:
+              priceprint=priceprint+3.50*logocoeur
+          elif logocoeurN>49 and logocoeurN<149:
+              priceprint=priceprint+3*logocoeur
+          elif logocoeurN>149 and logocoeurN<499:
+              priceprint=priceprint+2.50*logocoeur
+          elif logocoeurN>499 and logocoeurN<2000:
+              priceprint=priceprint+2*logocoeur
           else:print('sur devis')
           print(frais)
           print(priceprint)
           frais=frais+40
         if lettragedos>0:
-             lettragedos=lettragedos*quantity
-             if lettragedos<=9:
-                 priceprint=priceprint+15
-             elif lettragedos>9 and lettragedos<=24:
-                 priceprint=priceprint+7
-             elif lettragedos>24 and lettragedos<=49:
-                 priceprint=priceprint+5
-             elif lettragedos>49 and lettragedos<149:
-                 priceprint=priceprint+3.5
-             elif lettragedos>149 and lettragedos<499:
-                 priceprint=priceprint+3
-             elif lettragedos>499 and lettragedos<2000:
-                 priceprint=priceprint+2.50
+             lettragedosN=lettragedos*quantity
+             if lettragedosN<=9:
+                 priceprint=priceprint+15*lettragedos
+             elif lettragedosN>9 and lettragedosN<=24:
+                 priceprint=priceprint+7*lettragedos
+             elif lettragedosN>24 and lettragedosN<=49:
+                 priceprint=priceprint+5*lettragedos
+             elif lettragedosN>49 and lettragedosN<149:
+                 priceprint=priceprint+3.5*lettragedos
+             elif lettragedosN>149 and lettragedosN<499:
+                 priceprint=priceprint+3*lettragedos
+             elif lettragedosN>499 and lettragedosN<2000:
+                 priceprint=priceprint+2.50*lettragedos
              else:print('sur devis')
              frais=frais+50
         print(priceprint)
         if logodos>0:
-           logodos=logodos*quantity
-           if logodos<=9:
-               priceprint=priceprint+18
-           elif logodos>9 and logodos<=24:
-               priceprint=priceprint+9
-           elif logodos>24 and logodos<=49:
-               priceprint=priceprint+7.50
-           elif logodos>49 and logodos<149:
-               priceprint=priceprint+6.5
-           elif logodos>149 and logodos<499:
-               priceprint=priceprint+5.5
-           elif logodos>499 and logodos<2000:
-               priceprint=priceprint+4.50
+           logodosN=logodos*quantity
+           if logodosN<=9:
+               priceprint=priceprint+18*logodos
+           elif logodosN>9 and logodosN<=24:
+               priceprint=priceprint+9*logodos
+           elif logodosN>24 and logodosN<=49:
+               priceprint=priceprint+7.50*logodos
+           elif logodosN>49 and logodosN<149:
+               priceprint=priceprint+6.5*logodos
+           elif logodosN>149 and logodosN<499:
+               priceprint=priceprint+5.5*logodos
+           elif logodosN>499 and logodosN<2000:
+               priceprint=priceprint+4.50*logodos
            else:print('sur devis')
            frais=frais+70
         print(priceprint)
