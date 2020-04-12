@@ -40,7 +40,7 @@ class NameForm(FlaskForm):
 class FormDevis(FlaskForm):
         title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'Sweat à capuche'),('casquetteTrucker', 'Casquette Trucker'),('casquettebaseball', 'Casquette Tissus Baseball'),('bonnet', 'Bonnet'),('t-shirt','t-shirt'),('sweat','sweat'),('TPB','T-shirt premium bio'),('sans produit','sans produit')])
         quantity = IntegerField('Quantité?', validators=[NumberRange(min=0, max=1000)])
-        surnom=SelectField('Surnoms', [DataRequired()], choices=[('0', 'Aucun'),('1', 'Dos'),('2', 'Coeur'),('3', 'Les deux')])
+        surnom=SelectField('Surnom', [DataRequired()], choices=[('0', 'Aucun'),('1', 'Dos'),('2', 'Coeur'),('3', 'Les deux')])
         lettragecoeur = IntegerField('lettrage coeur?', validators=[NumberRange(min=0, max=10)])
         lettragedos=IntegerField('lettrage dos?', validators=[NumberRange(min=0, max=10)])
         coeur = IntegerField('logo coeur?', validators=[NumberRange(min=0, max=10)])
@@ -119,6 +119,10 @@ def bot(name):
                 surnom=3
     elif surnom is None:
         surnom=0
+    else : 
+        print(surnom)
+        surnom=0
+        
                 
        
     priceprint=0
@@ -522,7 +526,7 @@ def bot(name):
         print(priceprint)
         print("ceci est le surnom numéro 0,1 ou 2 ou 3")
         print(surnom)
-        if surnom >0:
+        if surnom>=0:
             if surnom==1:
                 surnom=quantity
                 if surnom<=10:
