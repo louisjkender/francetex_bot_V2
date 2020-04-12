@@ -86,7 +86,9 @@ def bot(name):
     productprice=0
     marge=0
     lettragedos=0
+    surnom=0
     color=form.color.data
+
 
 
     if color=="1":
