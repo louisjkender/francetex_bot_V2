@@ -504,6 +504,8 @@ def bot(name):
            else:print('sur devis')
            frais=frais+70
         print(priceprint)
+        print("ceci est le surnom numéro 0,1 ou 2 ou 3")
+        print(surnom)
         if surnom >0:
             if surnom==1:
                 surnom=quantity
