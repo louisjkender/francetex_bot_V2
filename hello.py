@@ -117,7 +117,7 @@ def bot(name):
                 surnom=3
     elif surnom=="dos":
                 surnom=3
-    elif surnom is none:
+    elif surnom is None:
         surnom=0
                 
        
