@@ -116,10 +116,8 @@ def bot(name):
         logodos=0
     if lettragecoeur is None:
         lettragecoeur=0
-    if surnom is None:
-        surnom=0
-    if surnom is not IntegerField:
-        surnom=0
+
+
 
     if marge is None:
         marge=0
@@ -287,6 +285,7 @@ def bot(name):
                              size=3
 
     print(size)
+    print(surnom)
     if lock==True:
 
       if quantityfeuille>0:
