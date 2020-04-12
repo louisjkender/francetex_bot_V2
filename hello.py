@@ -40,7 +40,7 @@ class NameForm(FlaskForm):
 class FormDevis(FlaskForm):
         title = SelectField('Produit', [DataRequired()], choices=[('hoodie', 'Sweat à capuche'),('casquetteTrucker', 'Casquette Trucker'),('casquettebaseball', 'Casquette Tissus Baseball'),('bonnet', 'Bonnet'),('t-shirt','t-shirt'),('sweat','sweat'),('TPB','T-shirt premium bio'),('sans produit','sans produit')])
         quantity = IntegerField('Quantité?', validators=[NumberRange(min=0, max=1000)])
-        surnom=SelectField('Surnoms', [DataRequired()], choices=[(0, 'Aucun'),(1, 'Dos'),(2, 'Coeur'),(3, 'Les deux')])
+        surnom=SelectField('Surnoms', [DataRequired()], choices=[('0', 'Aucun'),('1', 'Dos'),('2', 'Coeur'),('3', 'Les deux')])
         lettragecoeur = IntegerField('lettrage coeur?', validators=[NumberRange(min=0, max=10)])
         lettragedos=IntegerField('lettrage dos?', validators=[NumberRange(min=0, max=10)])
         coeur = IntegerField('logo coeur?', validators=[NumberRange(min=0, max=10)])
@@ -94,7 +94,7 @@ def bot(name):
     elif color=="2":
         color=2
 
-    surnom=0
+    
     quantity=form.quantity.data
     lettragecoeur=form.lettragecoeur.data
     coeur=form.coeur.data
@@ -105,6 +105,17 @@ def bot(name):
     logocoeur=form.logocoeur.data
     logodos=form.logodos.data
     print(surnom)
+    if surnom=="0":
+                surnom=0
+    elif surnom=="1":
+                surnom=1
+    elif surnom=="2":
+                surnom=2
+    elif surnom=="3":
+                surnom=3
+    elif surnom=="dos":
+                surnom=3
+                
        
     priceprint=0
 
