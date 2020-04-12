@@ -104,6 +104,8 @@ def bot(name):
     surnom=form.surnom.data
     logocoeur=form.logocoeur.data
     logodos=form.logodos.data
+    print(surnom)
+       
     priceprint=0
 
     marge=form.marge.data
